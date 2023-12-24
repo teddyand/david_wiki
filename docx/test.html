@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<style>
+	#wrapper {
+		padding-top: 30px !important;
+	}
+
+	#criticnav {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		box-shadow: 0 1px 1px 1px #777;
+		margin: 0;
+		padding: 0;
+		background-color: white;
+		font-size: 12px;
+	}
+
+	#criticnav ul {
+		list-style-type: none;
+		width: 90%;
+		margin: 0 auto;
+		padding: 0;
+	}
+
+	#criticnav ul li {
+		display: block;
+		width: 33%;
+		text-align: center;
+		padding: 10px 0 5px!important;
+		margin: 0 !important;
+		line-height: 1em;
+		float: left;
+		border-left: 1px solid #ccc;
+		text-transform: uppercase;
+	}
+
+	#criticnav ul li:before {
+		content: none !important;
+	}
+
+	#criticnav ul li#edited-button {
+		border-right: 1px solid #ccc;
+	}
+
+	#criticnav ul li.active {
+		background-image: -webkit-linear-gradient(top, white, #cccccc)
+	}
+
+	.original del {
+			text-decoration: none;
+	}	
+
+	.original ins,
+	.original span.popover,
+	.original ins.break {
+		display: none;
+	}
+
+	.edited ins {
+			text-decoration: none;
+	}	
+
+	.edited del,
+	.edited span.popover,
+	.edited ins.break {
+		display: none;
+	}
+
+	.original mark,
+	.edited mark {
+		background-color: transparent;
+	}
+
+	.markup mark {
+	    background-color: #fffd38;
+	    text-decoration: none;
+	}
+
+	.markup del {
+	    background-color: #f6a9a9;
+	    text-decoration: none;
+	}
+
+	.markup ins {
+	    background-color: #a9f6a9;
+	    text-decoration: none;
+	}
+
+	.markup ins.break {
+		display: block;
+		line-height: 2px;
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+
+	.markup ins.break span {
+		line-height: 1.5em;
+	}
+
+	.markup .popover {
+		background-color: #4444ff;
+		color: #fff;
+	}
+
+	.markup .popover .critic.comment {
+	    display: none;
+	}
+
+	.markup .popover:hover span.critic.comment {
+	    display: block;
+	    position: absolute;
+	    width: 200px;
+	    left: 30%;
+	    font-size: 0.8em; 
+	    color: #ccc;
+	    background-color: #333;
+	    z-index: 10;
+	    padding: 0.5em 1em;
+	    border-radius: 0.5em;
+	}
+
+</style>
+
+
+<div id="criticnav"><ul>
+	<li id="markup-button">Markup</li>
+	<li id="original-button">Original</li>
+	<li id="edited-button">Edited</li>
+</ul></div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+
+<script type="text/javascript">
+
+	function critic() {
+
+		$('#firstdiff').remove();
+		$('#wrapper').addClass('markup');
+		$('#markup-button').addClass('active');
+		$('ins.break').unwrap();
+		$('span.critic.comment').wrap('<span class="popover" />');
+		$('span.critic.comment').before('&#8225;');
+
+	}  
+
+	function original() {
+		$('#original-button').addClass('active');
+		$('#edited-button').removeClass('active');
+		$('#markup-button').removeClass('active');
+
+		$('#wrapper').addClass('original');
+		$('#wrapper').removeClass('edited');
+		$('#wrapper').removeClass('markup');
+	}
+
+	function edited() {
+		$('#original-button').removeClass('active');
+		$('#edited-button').addClass('active');
+		$('#markup-button').removeClass('active');
+
+		$('#wrapper').removeClass('original');
+		$('#wrapper').addClass('edited');
+		$('#wrapper').removeClass('markup');
+	} 
+
+	function markup() {
+		$('#original-button').removeClass('active');
+		$('#edited-button').removeClass('active');
+		$('#markup-button').addClass('active');
+
+		$('#wrapper').removeClass('original');
+		$('#wrapper').removeClass('edited');
+		$('#wrapper').addClass('markup');
+	}
+
+	var o = document.getElementById("original-button");
+	var e = document.getElementById("edited-button");
+	var m = document.getElementById("markup-button");
+
+	window.onload = critic;
+	o.onclick = original;
+	e.onclick = edited;
+	m.onclick = markup;
+
+</script>
+
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+---
+bibliography: papers.bib
+csl: 'chinese-gb7714-2005-numeric.csl'
+fignos-cleveref: True
+fignos-plus-name: 图
+fignos-caption-name: 图
+---
+
+### 如何写论文
+
+根据**“广大科研工作者应该将论文写在大地上”**的号召。
+
+* 论文可发表于网络
+* 论文发表于期刊
+
+#### 论文常用到的形式：
+
+##### (一)文章评注标记critic-markup：
+
+Don’t go around saying<del> to people that </del> the world owes you a living. The
+world owes you nothing. It was here first. <del>One</del><ins>Only one</ins> thing is
+impossible for God: To find <ins>any</ins> sense in any copyright law on the
+planet. <mark>Truth is stranger than fiction</mark><span class="critic comment">true</span>, but it is because
+Fiction is obliged to stick to possibilities; Truth isn’t.
+
+
+##### （二）文章交叉引用Biblatex citation:
+
+学术大咖陈见着[^1]
+
+[^1]: 文章作者： 陈见着 ORCID -XX.XXXXX.XX
+
+爱因斯坦的理论研究[@einstein1950meaning]
+
+智能车结构制作设计入门[@臧海波2016机器人制作入门]
+
+如何用markdown写论文[]
+
+esp32引脚如{@fig:esp32}所示
+
+![esp32引脚](esp-32x.png){#fig:esp32 height=150px}
+
+![大数据海报](Big-Data.jpg){#fig:bigdata height=150px}
+
+大数据海报如{@fig:bigdata}所示
+
+##### （三）PlantUML图表：
+```{.plantuml caption="This is an image, created by **PlantUML**." width=50%}
+@startmindmap
+* Debian
+** Ubuntu
+*** Linux Mint
+*** Kubuntu
+*** Lubuntu
+*** KDE Neon
+** LMDE
+** SolydXK
+** SteamOS
+** Raspbian with a very long name
+*** <s>Raspmbc</s> => OSMC
+*** <s>Raspyfi</s> => Volumio
+@endmindmap
+```
+```{.py2image caption="This is an image, created by **Python**."}
+import matplotlib
+matplotlib.use('Agg')
+
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Fixing random state for reproducibility
+np.random.seed(19680801)
+
+dt = 0.01
+t = np.arange(0, 30, dt)
+nse1 = np.random.randn(len(t))                 # white noise 1
+nse2 = np.random.randn(len(t))                 # white noise 2
+
+# Two signals with a coherent part at 10Hz and a random part
+s1 = np.sin(2 * np.pi * 10 * t) + nse1
+s2 = np.sin(2 * np.pi * 10 * t) + nse2
+
+fig, axs = plt.subplots(2, 1)
+axs[0].plot(t, s1, t, s2)
+axs[0].set_xlim(0, 2)
+axs[0].set_xlabel('time')
+axs[0].set_ylabel('s1 and s2')
+axs[0].grid(True)
+
+cxy, f = axs[1].cohere(s1, s2, 256, 1. / dt)
+axs[1].set_ylabel('coherence')
+
+fig.tight_layout()
+plt.savefig("$DESTINATION$", dpi=300, format="$FORMAT$")
+```
+
+##### （四）数学公式：
+$a+b$ # Recommended syntax!
+
+#### 论文发表场合：
+* 网络(wiki) ：markdown gollum[]
+```
+gollum -c config.rb
+```
+
+* 期刊： markdown 、pandoc[]
+```
+pancritic Home.md -t markdown -m m | pandoc -F pandoc-fignos -C --bibliography=papers.bib --csl=chinese-gb7714-2005-numeric.csl -s --metadata title="假论文"  -o output.docx
+```
+
+##### 相关插件介绍：
+* pandoc-fignos
+* pancritic
+* lua-filters
+```
+pandoc Home.md -f markdown -t docx --self-contained --standalone --lua-filter=diagram-generator.lua --metadata=plantumlPath:"plantuml.jar" --metadata=javaPath:"java" -o README.docx
+
+```
+
+```
+pancritic Home.md -t markdown -m m | pandoc -f markdown -t docx --self-contained --standalone -F pandoc-fignos -C --bibliography=papers.bib --csl=chinese-gb7714-2005-numeric.csl -s --metadata title="假论文"  --lua-filter=diagram-generator.lua --metadata=plantumlPath:"plantuml.jar" --metadata=javaPath:"java" --metadata=pythonPath:"/usr/bin/python3" -o README.docx
+
+```
+
+# Refercnce
+
+::: {#przibram1967letters}
+:::
+
+
+</div>
+
+</body>
+
+</html>

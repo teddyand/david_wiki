@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>数学期望</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">数学期望</h1>
+</header>
+<h3 id="抽奖问题zotero-46">抽奖问题<span class="citation" data-cites="zotero-46"><sup>[1]</sup></span></h3>
+<p>假设某百货超市现有一批快到期的日用产品急需处理，超市老板设计了免费抽奖活动来处理掉了这些商品。纸箱中装有大小相同的20个球，10个10分，10个5分，从中摸出10个球，摸出的10个球的分数之和即为中奖分数，获奖如下：</p>
+<p>一等奖 100分，冰柜一个，价值2500元；</p>
+<p>二等奖 50分， 电视机一个，价值1000元；</p>
+<p>三等奖 95分， 洗发液8瓶，价值176元；</p>
+<p>四等奖 55分， 洗发液4瓶，价值88元；</p>
+<p>五等奖 60分， 洗发液2瓶，价值44元；</p>
+<p>六等奖 65分， 牙膏一盒， 价值8元；</p>
+<p>七等奖 70分， 洗衣粉一袋，价值5元；</p>
+<p>八等奖 85分， 香皂一块， 价值3元；</p>
+<p>九等奖 90分， 牙刷一把， 价值2元；</p>
+<p>十等奖 75分与80分为优惠奖，只収成本价22元，将获得洗发液一瓶；</p>
+<p>根据离散量数学期望公式：</p>
+<p><span class="math display">$$ \epsilon(X)= \sum_{k=1}^\infty x_k p_k
+$$</span></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline"><em>k</em></span></th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">score</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">95</td>
+<td style="text-align: center;">55</td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">65</td>
+<td style="text-align: center;">70</td>
+<td style="text-align: center;">85</td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">75</td>
+<td style="text-align: center;">80</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><em>p</em><sub><em>k</em></sub></span></td>
+<td style="text-align: center;"><span class="math inline">5.4<em>e</em> − 06</span></td>
+<td style="text-align: center;"><span class="math inline">5.4<em>e</em> − 06</span></td>
+<td style="text-align: center;"><span class="math inline">5.4<em>e</em> − 04</span></td>
+<td style="text-align: center;"><span class="math inline">5.4<em>e</em> − 04</span></td>
+<td style="text-align: center;">1.1e-2</td>
+<td style="text-align: center;">7.8e-2</td>
+<td style="text-align: center;">2.4e-1</td>
+<td style="text-align: center;">7.8e-2</td>
+<td style="text-align: center;">1.1e-2</td>
+<td style="text-align: center;">3.4e-1</td>
+<td style="text-align: center;">2.4e-1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><em>x</em><sub><em>k</em></sub></span></td>
+<td style="text-align: center;">2500</td>
+<td style="text-align: center;">1000</td>
+<td style="text-align: center;">176</td>
+<td style="text-align: center;">88</td>
+<td style="text-align: center;">44</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">-22</td>
+<td style="text-align: center;">-22</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><em>ϵ</em><sub><em>k</em></sub></span></td>
+<td style="text-align: center;">0.0135</td>
+<td style="text-align: center;">0.0054</td>
+<td style="text-align: center;">0.095</td>
+<td style="text-align: center;">0.0475</td>
+<td style="text-align: center;">0.484</td>
+<td style="text-align: center;">0.624</td>
+<td style="text-align: center;">1.2</td>
+<td style="text-align: center;">0.234</td>
+<td style="text-align: center;">0.022</td>
+<td style="text-align: center;">-7.48</td>
+<td style="text-align: center;">-5.28</td>
+</tr>
+</tbody>
+</table>
+<p>分析：表面上看整个活动对顾客都是有利的，一等奖到九等奖都是白得的，只有十等奖才收取一点成本价。但经过分析可以知道商家真的就亏损了吗？顾客就真能从中获得抽取大奖的机会吗？求得其期望值便可真相大白。摸出10个球的分值只有11种情况，用X表示摸奖者获得的奖励金额数，计算得到E(X)=-10.098，表明商家在平均每一次的抽奖中将获得10.098元，而平均每个抽奖者将花
+10.098元来享受这种免费的抽奖。
+从而可以看出顾客真的就占到大便宜了吗？相反，商家采用这种方法不仅把快要到期的商品处理出去了，而且还为超市大量集聚了人气，一举多得。此百货超市老板运用数学期望估计出了他不会亏损而做了这个免费抽奖活动，最后一举多得，从中可看出了数学期望这一科学的方法在经济决策中的重要性。</p>
+<h3 class="unnumbered" id="reference">Reference</h3>
+<div id="refs" class="references csl-bib-body" role="doc-bibliography">
+<div id="ref-zotero-46" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">《数学之友》- 百度学术[EB/OL]. [2023-07-20]. <a href="https://xueshu.baidu.com/usercenter/journal/baseinfo?cmd=journal_page&amp;entity_id=baca1caee0c6279145f0bd655baae922&amp;tab=discuss">https://xueshu.baidu.com/usercenter/journal/baseinfo?cmd=journal_page&amp;entity_id=baca1caee0c6279145f0bd655baae922&amp;tab=discuss</a>.</div>
+</div>
+</div>
+</body>
+</html>
