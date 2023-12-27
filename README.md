@@ -12,5 +12,7 @@ gem i  gollum '>=?'
 ```
 gollum -c config.rb   (-h 0.0.0.0 can choice)
 ```
+5. create a test.md in "create a new page" and save
+6. click overview button in test.md page can browse all article.
 
 [for more please see:]()
