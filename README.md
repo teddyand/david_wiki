@@ -8,7 +8,7 @@ wiki in gollum that can be converted to docx whick published on wechat public
 ```
 gem i  gollum '>=?'
 ```
-4. cd direction where you clone the code and start wiki with command:
+4. cd directory where you clone the code and start wiki with command:
 ```
 gollum -c config.rb   (-h 0.0.0.0 can choice)
 ```
