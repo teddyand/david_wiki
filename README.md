@@ -8,11 +8,24 @@ wiki in gollum that can be converted to docx whick published on wechat public
 ```
 gem i  gollum '>=?'
 ```
-4. cd directory where you clone the code and start wiki with command:
+4. 克隆仓库
 ```
-gollum -c config.rb   (-h 0.0.0.0 can choice)
+git clone git@github.com:teddyand\david_wiki.git
 ```
-5. create a test.md in "create a new page" and save
-6. click overview button in test.md page can browse all article.
+5. make a new directory
+6. 拷贝仓库文件到新文件夹(每次 git pull 后的文件重新拷贝一下)
+```
+cp -rf ~/david_wiki ~/(new directory)/
+```
+7.在新文件夹中运行gollum （该文件夹无远程仓库连接，仅作为本地浏览使用）
+```
+cd (new directory)
+git init
+git add .
+git commit -m "blabla"
+gollum -c config.rb -h 0.0.0.0
+```
+
+
 
 [for more please see:]()
